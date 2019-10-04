@@ -1,7 +1,7 @@
 import random
 random.seed(42)
 from virus import Virus
-
+import pytest
 
 class Person(object):
     ''' Person objects will populate the simulation. '''
@@ -76,7 +76,7 @@ def test_sick_person_instantiation():
     person2 = Person(4, True,virus2)
 
     assert person2._id == 4
-    assert person.is_vaccinated is True
+    assert person2.is_vaccinated is True
     assert person2.infection.name == virus2.name
     assert person2.infection.repro_rate == virus2.repro_rate
     assert person2.infection.mortality_rate == virus2.mortality_rate
@@ -84,9 +84,9 @@ def test_sick_person_instantiation():
 
 
 def test_did_survive_infection():
-    # TODO: Create a Virus object to give a Person object an infection
+    # Create a Virus object to give a Person object an infection
     virus = Virus("Dysentery", 0.7, 0.2)
-    # TODO: Create a Person object and give them the virus infection
+    # Create a Person object and give them the virus infection
     person = Person(4, False, virus)
 
     # Resolve whether the Person survives the infection or not
@@ -97,9 +97,15 @@ def test_did_survive_infection():
         # TODO: Write your own assert statements that test
         # the values of each attribute for a Person who survived
         # assert ...
+        assert person.is_vaccinated == True
+        assert person.infection == None
+
     else:
         assert person.is_alive is False
         # TODO: Write your own assert statements that test
         # the values of each attribute for a Person who did not survive
         # assert ...
-        pass
+        assert person.is_vaccinated == False
+        assert person.infection.name == virus.name
+        assert person.infection.repro_rate == virus.repro_rate
+        assert person.infection.mortality_rate == virus.mortality_rate

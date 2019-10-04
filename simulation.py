@@ -9,7 +9,7 @@ class Simulation(object):
     ''' Main class that will run the herd immunity simulation program.
     Expects initialization parameters passed as command line arguments when file is run.
 
-    Simulates the spread of a virus through a given population.  The percentage of the
+    Simulates the spread of a virus through a given population. The percentage of the
     population that are vaccinated, the size of the population, and the amount of initially
     infected people in a population are all variables that can be set when the program is run.
     '''
@@ -36,8 +36,9 @@ class Simulation(object):
         # TODO: Store each newly infected person's ID in newly_infected attribute.
         # At the end of each time step, call self._infect_newly_infected()
         # and then reset .newly_infected back to an empty list.
-        self.logger = None
-        self.population = [] # List of Person objects
+
+        self.logger = Logger(self.file_name)
+        self.population = self._create_population(self.initial_infected)
         self.pop_size = pop_size # Int
         self.next_person_id = 0 # Int
         self.virus = virus # Virus object
@@ -49,6 +50,7 @@ class Simulation(object):
         self.file_name = "{}_simulation_pop_{}_vp_{}_infected_{}.txt".format(
             virus_name, population_size, vacc_percentage, initial_infected)
         self.newly_infected = []
+
 
     def _create_population(self, initial_infected):
         '''This method will create the initial population.
@@ -68,7 +70,25 @@ class Simulation(object):
 
         # Use the attributes created in the init method to create a population that has
         # the correct intial vaccination percentage and initial infected.
-        pass
+        population = []
+       # normal_population = []
+        while initial_infected >= 1:
+            # person = Person(self.next_person_id, False, self.virus)
+            population.append(Person(self.next_person_id, False, self.virus))
+            initial_infected -=initial_infected
+
+        #non infect = total population  - initial infect
+        #vaccinated = non infected * vaccinated percentage
+        #non_infected = self.pop_size - initial_infected
+        vaccinated = self.pop_size * self.vacc_percentage
+        while vaccinated > 0:
+           # person = Person(self.next_person_id, True)
+            population.append(Person(self.next_person_id, True))
+            vaccinated -= vaccinated
+
+        non_vaccinated = 
+
+        return population
 
     def _simulation_should_continue(self):
         ''' The simulation should only end if the entire population is dead
@@ -78,7 +98,15 @@ class Simulation(object):
                 bool: True for simulation should continue, False if it should end.
         '''
         # TODO: Complete this helper method.  Returns a Boolean.
-        pass
+        for person in self.populations:
+
+            if person.is_alive() is True or someone is not vaccinated: 
+                return True
+
+            if person.is_alive() is False or everyone is vaccinated:
+                return False  
+
+
 
     def run(self):
         ''' This method should run the simulation until all requirements for ending
@@ -92,13 +120,14 @@ class Simulation(object):
         # HINT: You may want to call the logger's log_time_step() method at the end of each time step.
         # TODO: Set this variable using a helper
         time_step_counter = 0
-        should_continue = None
+        should_continue = self._simulation_should_continue()
 
         while should_continue:
         # TODO: for every iteration of this loop, call self.time_step() to compute another
         # round of this simulation.
         print('The simulation has ended after {time_step_counter} turns.'.format(time_step_counter))
-        pass
+        
+        self.logger.log_time_step(time_step_counter)
 
     def time_step(self):
         ''' This method should contain all the logic for computing one time step
