@@ -49,6 +49,7 @@ class Simulation(object):
         self.total_dead = 0 # Int
         self.file_name = "{}_simulation_pop_{}_vp_{}_infected_{}.txt".format(
             virus_name, population_size, vacc_percentage, initial_infected)
+
         self.newly_infected = []
 
 
@@ -97,14 +98,14 @@ class Simulation(object):
             Returns:
                 bool: True for simulation should continue, False if it should end.
         '''
-        # TODO: Complete this helper method.  Returns a Boolean.
-        for person in self.populations:
+        # Complete this helper method.  Returns a Boolean.
+        cont = None
+        if self.pop_size == self.total_dead or self.vacc_percentage == 1:
+            cont = False
+        else:
+            cont = True
 
-            if person.is_alive() is True or someone is not vaccinated: 
-                return True
-
-            if person.is_alive() is False or everyone is vaccinated:
-                return False  
+        return cont
 
 
 
