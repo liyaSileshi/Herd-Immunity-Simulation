@@ -159,7 +159,7 @@ class Simulation(object):
         if rand_person.is_alive == True and rand_person.infection == None:
             return rand_person
         else:
-            get_rand_person()
+            self.get_rand_person()
             
     def time_step(self):
         ''' This method should contain all the logic for computing one time step
