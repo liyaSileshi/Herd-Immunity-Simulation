@@ -215,8 +215,9 @@ class Simulation(object):
         # to reset self.newly_infected back to an empty list.
         for id in self.newly_infected:
             for person in self.population:
-                person.infection = self.virus
-
+                if id == person._id:
+                    person.infection = self.virus
+        
 
 
 if __name__ == "__main__":
