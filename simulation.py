@@ -124,17 +124,17 @@ class Simulation(object):
         cont = None
         # self.total_dead = 
         # if self.pop_size == self.total_dead or self.vacc_percentage == 1:
-        if self.total_dead + self.new_vaccinated + self.initial_infected == self.population:
+        return not self.total_dead + self.new_vaccinated >= self.pop_size
         #for person in self.population:
         #if person.did_survive_infection():
         #for people in self.population:
             #if people.is_alive:
-            cont = False
+        #     cont = False
 
-        else:
-            cont = True
+        # else:
+        #     cont = True
 
-        return cont
+        # return cont
 
     def run(self):
         ''' This method should run the simulation until all requirements for ending
@@ -147,8 +147,8 @@ class Simulation(object):
         # HINT: You may want to call the logger's log_time_step() method at the end of each time step.
         # TODO: Set this variable using a helper
         time_step_counter = 0
-        should_continue = self._simulation_should_continue()
-        while should_continue:
+        #should_continue = self._simulation_should_continue()
+        while self._simulation_should_continue():
         # TODO: for every iteration of this loop, call self.time_step() to compute another
         # round of this simulation.
             self.time_step()
@@ -156,17 +156,16 @@ class Simulation(object):
             time_step_counter += 1
             self.logger.log_time_step(time_step_counter)
             print(f'The simulation has ended after {time_step_counter} turns.')
-            should_continue = self._simulation_should_continue()
+            #should_continue = self._simulation_should_continue()
         
     def get_rand_person(self):
         rand_person = random.choice(self.population)
         #print(rand_person)
-        # if rand_person.is_alive == True and rand_person.infection == None:
-        if rand_person.did_survive_infection():
+        if rand_person.is_alive and rand_person.infection == None:
+        #f rand_person.did_survive_infectio:
             return rand_person
         else:
-
-            self.get_rand_person()
+            return self.get_rand_person()
     
     def time_step(self):
         ''' This method should contain all the logic for computing one time step
@@ -185,9 +184,13 @@ class Simulation(object):
             while interaction_counter < 100:
 
                 rand_person = self.get_rand_person()
+                #if rand_person is not None:
+                #print(rand_person)
+                #if rand_person.is_alive:
                 self.interaction(infected, rand_person)
                 #self._infect_newly_infected()
                 interaction_counter += 1
+                print(interaction_counter)
         #print(interaction_counter)
 
     def interaction(self, person, random_person):
@@ -250,7 +253,7 @@ class Simulation(object):
                     # while True:
                     #     print(person.infection.name)
         for person in infected_people:
-            if person.did_survive_infection() is not True:
+            if not person.did_survive_infection():
                 self.total_dead += 1
             else:
                 self.new_vaccinated += 1
@@ -298,3 +301,5 @@ if __name__ == "__main__":
     #for sim in sim.newly_infected:
     # sim._infect_newly_infected()
     sim.run()
+    # print(sim.total_dead+sim.new_vaccinated)
+    # print(sim.total_dead+sim.new_vaccinated+sim.initial_infected)
