@@ -79,7 +79,7 @@ class Simulation(object):
 
         # self.pop_size
         people_vacc = round(self.vacc_percentage * self.pop_size)
-
+        #print(people_vacc)
         for i in range(self.pop_size):
 
             if initial_infected > 0:
@@ -120,11 +120,22 @@ class Simulation(object):
             Returns:
                 bool: True for simulation should continue, False if it should end.
         '''
+
+        if self.total_dead == self.pop_size or self.new_vaccinated == self.pop_size:
+            return False
+        
+        else:
+            return True
+
+
+
+
+
         # Complete this helper method.  Returns a Boolean.
-        cont = None
+        #cont = None
         # self.total_dead = 
         # if self.pop_size == self.total_dead or self.vacc_percentage == 1:
-        return not self.total_dead + self.new_vaccinated >= self.pop_size
+        #return not self.total_dead + self.new_vaccinated >= self.pop_size
         #for person in self.population:
         #if person.did_survive_infection():
         #for people in self.population:
@@ -155,7 +166,7 @@ class Simulation(object):
             self._infect_newly_infected()
             time_step_counter += 1
             self.logger.log_time_step(time_step_counter)
-            print(f'The simulation has ended after {time_step_counter} turns.')
+        print(f'The simulation has ended after {time_step_counter} turns.')
             #should_continue = self._simulation_should_continue()
         
     def get_rand_person(self):
@@ -190,7 +201,7 @@ class Simulation(object):
                 self.interaction(infected, rand_person)
                 #self._infect_newly_infected()
                 interaction_counter += 1
-                print(interaction_counter)
+                #print(interaction_counter)
         #print(interaction_counter)
 
     def interaction(self, person, random_person):
@@ -253,7 +264,7 @@ class Simulation(object):
                     # while True:
                     #     print(person.infection.name)
         for person in infected_people:
-            if not person.did_survive_infection():
+            if not person.did_survive_infection(): 
                 self.total_dead += 1
             else:
                 self.new_vaccinated += 1
@@ -291,8 +302,9 @@ if __name__ == "__main__":
 
     # sim.run()
     virus = Virus("Ebola",0.25 , 0.7)
-    sim = Simulation(100000,90,virus,10)
-
+    #sim = Simulation(100000,90,virus,10)
+    sim = Simulation(153,0.3,virus,10)
+    #sim._create_population(10)
     #print(sim.population)
     # print(len(sim._create_population(15)))
     # print(len(sim.infected_list))
