@@ -78,9 +78,10 @@ class Simulation(object):
         population = []
 
         # self.pop_size
-        people_vacc = self.vacc_percentage * self.pop_size
+        people_vacc = round(self.vacc_percentage * self.pop_size)
 
         for i in range(self.pop_size):
+
             if initial_infected > 0:
                 person = Person(self.next_person_id, False, self.virus)
                 population.append(person)
@@ -90,6 +91,7 @@ class Simulation(object):
             elif people_vacc > 0:
                 population.append(Person(self.next_person_id, True))
                 people_vacc -= 1
+
             else:
                 population.append(Person(self.next_person_id, False))
             self.next_person_id += 1
@@ -143,14 +145,17 @@ class Simulation(object):
         # TODO: for every iteration of this loop, call self.time_step() to compute another
         # round of this simulation.
             self.time_step()
+            self._infect_newly_infected()
             time_step_counter += 1
             self.logger.log_time_step(time_step_counter)
-            print('The simulation has ended after {time_step_counter} turns.'.format(time_step_counter))
+            print(f'The simulation has ended after {time_step_counter} turns.')
             should_continue = self._simulation_should_continue()
         
     def get_rand_person(self):
         rand_person = random.choice(self.population)
-        if rand_person.is_alive == True and rand_person.infection == None:
+        #print(rand_person)
+        # if rand_person.is_alive == True and rand_person.infection == None:
+        if rand_person.did_survive_infection():
             return rand_person
         else:
             self.get_rand_person()
@@ -172,7 +177,9 @@ class Simulation(object):
             while interaction_counter < 100:
                 rand_person = self.get_rand_person()
                 self.interaction(infected, rand_person)
+                #self._infect_newly_infected()
                 interaction_counter += 1
+        print(interaction_counter)
 
     def interaction(self, person, random_person):
         '''This method should be called any time two living people are selected for an
@@ -199,12 +206,18 @@ class Simulation(object):
             #     Simulation object's newly_infected array, so that their .infected
             #     attribute can be changed to True at the end of the time step.
         # TODO: Call slogger method during this method.
+        
+
         if random_person.is_vaccinated == False and random_person.infection == None:
             num = random.uniform(0.0, 1.0)
             if num < self.virus.repro_rate :
                 self.newly_infected.append(random_person._id)
+            self.logger.log_interaction(person, random_person)
 
-
+        # if random_person.is_vaccinated == True or random_person.infection is not None:
+        else:
+            self.logger.log_interaction(person, random_person, True,
+                        True)
         
 
     def _infect_newly_infected(self):
@@ -217,7 +230,8 @@ class Simulation(object):
             for person in self.population:
                 if id == person._id:
                     person.infection = self.virus
-        
+        self.newly_infected = []
+
 
 
 if __name__ == "__main__":
@@ -237,9 +251,10 @@ if __name__ == "__main__":
     # sim = Simulation(pop_size, vacc_percentage, initial_infected, virus)
 
     # sim.run()
+    virus = Virus("Ebola", 0.25, 0.7)
+    sim = Simulation(100,10,virus)
 
-    sim = Simulation(100,10,"Chicken pox",15)
-
-    print(sim.population)
-    print(len(sim.population))
+    #print(sim.population)
+    print(len(sim._create_population(15)))
     print(len(sim.infected_list))
+    sim.run()
