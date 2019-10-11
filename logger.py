@@ -24,7 +24,7 @@ class Logger(object):
         # NOTE: Make sure to end every line with a '/n' character to ensure that each
         # event logged ends up on a separate line!
         with open(self.file_name, 'w') as file:
-            file.write(f'Population size : {pop_size}, vacc_per: {vacc_percentage}, virus_name: {virus_name}, mortality_rate: {mortality_rate}, repro_num: {basic_repro_num}/n')
+            file.write(f'Population size : {pop_size}, vacc_per: {vacc_percentage}, virus_name: {virus_name}, mortality_rate: {mortality_rate}, repro_num: {basic_repro_num}\n')
 
     def log_interaction(self, person, random_person, random_person_sick=None,
                         random_person_vacc=None, did_infect=None):
@@ -49,7 +49,7 @@ class Logger(object):
             elif random_person_vacc :
                 file.write(f"{person._id} didn't infect {random_person._id} because vaccinated \n")
 
-            else:
+            elif did_infect:
                 file.write(f"{person._id} infects {random_person._id} \n")
             #file.close()
 
@@ -65,12 +65,12 @@ class Logger(object):
         # Append the results of the infection to the logfile
         with open(self.file_name, "a") as file:
             if not did_die_from_infection:
-                file.write(f"{person.ID} died from infection \n")
+                file.write(f"{person._id} died from infection \n")
 
             else:
-                file.write(f"{person.ID} survivied infection \n")
+                file.write(f"{person._id} survivied infection \n")
 
-    def log_time_step(self, time_step_number):
+    def log_time_step(self, time_step_number, total_infected, total_dead, vaccine_saves):
         ''' STRETCH CHALLENGE DETAILS:
 
         If you choose to extend this method, the format of the summary statistics logged
@@ -88,4 +88,8 @@ class Logger(object):
         # TODO: Finish this method. This method should log when a time step ends, and a
         # new one begins.
         # NOTE: Here is an opportunity for a stretch challenge!
-        pass
+        with open(self.file_name, "a") as file:
+            file.write(f"Time step {time_step_number} ended, beginning {time_step_number + 1}\n")
+            file.write(f"Total infected: {total_infected}\n")
+            file.write(f"Total dead: {total_dead}\n")
+            file.write(f"Total times vaccine saved person: {vaccine_saves}")

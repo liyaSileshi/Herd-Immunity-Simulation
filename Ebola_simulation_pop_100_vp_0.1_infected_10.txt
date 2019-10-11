@@ -1,0 +1,101 @@
+Population size : 100, vacc_per: 0.1, virus_name: Ebola, mortality_rate: 1.0, repro_num: 1.0/n47 didn't infect 12 because vaccinated 
+47 didn't infect 47 because already sick 
+47 didn't infect 18 because vaccinated 
+47 didn't infect 10 because vaccinated 
+47 didn't infect 18 because vaccinated 
+47 didn't infect 13 because vaccinated 
+47 didn't infect 17 because vaccinated 
+47 didn't infect 12 because vaccinated 
+47 didn't infect 16 because vaccinated 
+47 didn't infect 11 because vaccinated 
+47 didn't infect 16 because vaccinated 
+47 didn't infect 14 because vaccinated 
+47 didn't infect 18 because vaccinated 
+47 didn't infect 11 because vaccinated 
+47 didn't infect 15 because vaccinated 
+47 didn't infect 47 because already sick 
+47 didn't infect 47 because already sick 
+47 didn't infect 13 because vaccinated 
+47 didn't infect 14 because vaccinated 
+47 didn't infect 17 because vaccinated 
+47 didn't infect 14 because vaccinated 
+47 didn't infect 12 because vaccinated 
+47 didn't infect 17 because vaccinated 
+47 didn't infect 47 because already sick 
+47 didn't infect 19 because vaccinated 
+47 didn't infect 12 because vaccinated 
+47 didn't infect 47 because already sick 
+47 didn't infect 12 because vaccinated 
+47 didn't infect 47 because already sick 
+47 didn't infect 15 because vaccinated 
+47 didn't infect 11 because vaccinated 
+47 didn't infect 16 because vaccinated 
+47 didn't infect 18 because vaccinated 
+47 didn't infect 18 because vaccinated 
+47 didn't infect 16 because vaccinated 
+47 didn't infect 14 because vaccinated 
+47 didn't infect 16 because vaccinated 
+47 didn't infect 16 because vaccinated 
+47 didn't infect 14 because vaccinated 
+47 didn't infect 13 because vaccinated 
+47 didn't infect 13 because vaccinated 
+47 didn't infect 10 because vaccinated 
+47 didn't infect 18 because vaccinated 
+47 didn't infect 16 because vaccinated 
+47 didn't infect 12 because vaccinated 
+47 didn't infect 14 because vaccinated 
+47 didn't infect 12 because vaccinated 
+47 didn't infect 47 because already sick 
+47 didn't infect 19 because vaccinated 
+47 didn't infect 11 because vaccinated 
+47 didn't infect 10 because vaccinated 
+47 didn't infect 11 because vaccinated 
+47 didn't infect 12 because vaccinated 
+47 didn't infect 47 because already sick 
+47 didn't infect 16 because vaccinated 
+47 didn't infect 15 because vaccinated 
+47 didn't infect 13 because vaccinated 
+47 didn't infect 19 because vaccinated 
+47 didn't infect 13 because vaccinated 
+47 didn't infect 47 because already sick 
+47 didn't infect 14 because vaccinated 
+47 didn't infect 18 because vaccinated 
+47 didn't infect 18 because vaccinated 
+47 didn't infect 11 because vaccinated 
+47 didn't infect 47 because already sick 
+47 didn't infect 10 because vaccinated 
+47 didn't infect 19 because vaccinated 
+47 didn't infect 10 because vaccinated 
+47 didn't infect 14 because vaccinated 
+47 didn't infect 14 because vaccinated 
+47 didn't infect 17 because vaccinated 
+47 didn't infect 15 because vaccinated 
+47 didn't infect 16 because vaccinated 
+47 didn't infect 14 because vaccinated 
+47 didn't infect 11 because vaccinated 
+47 didn't infect 13 because vaccinated 
+47 didn't infect 10 because vaccinated 
+47 didn't infect 14 because vaccinated 
+47 didn't infect 18 because vaccinated 
+47 didn't infect 13 because vaccinated 
+47 didn't infect 18 because vaccinated 
+47 didn't infect 19 because vaccinated 
+47 didn't infect 19 because vaccinated 
+47 didn't infect 47 because already sick 
+47 didn't infect 11 because vaccinated 
+47 didn't infect 19 because vaccinated 
+47 didn't infect 13 because vaccinated 
+47 didn't infect 10 because vaccinated 
+47 didn't infect 47 because already sick 
+47 didn't infect 12 because vaccinated 
+47 didn't infect 19 because vaccinated 
+47 didn't infect 10 because vaccinated 
+47 didn't infect 18 because vaccinated 
+47 didn't infect 16 because vaccinated 
+47 didn't infect 10 because vaccinated 
+47 didn't infect 16 because vaccinated 
+47 didn't infect 11 because vaccinated 
+47 didn't infect 17 because vaccinated 
+47 didn't infect 19 because vaccinated 
+47 didn't infect 12 because vaccinated 
+47 didn't infect 16 because vaccinated 

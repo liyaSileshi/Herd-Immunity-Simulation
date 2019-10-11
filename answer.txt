@@ -1,0 +1,21 @@
+What were the inputs you gave the simulation? (Population size, percent vaccinated, virus name, mortality rate, reproductive rate)
+population size: 1000
+percent vaccinated : 0.8
+virus name: small pox
+mortality rate: 0.15
+reproductive rate: 0.06
+
+What percentage of the population became infected at some point before the virus burned out?
+
+139/1000
+13.9%
+
+What percentage of the population died from the virus?
+
+33/1000
+3.3%
+
+
+Out of all interactions sick individuals had during the entire simulation, how many total interactions did we see where a vaccination saved a person from potentially becoming infected?
+
+12,911 times

@@ -45,6 +45,7 @@ class Simulation(object):
         self.pop_size = pop_size # Int
         self.infected_list = []
         self.new_vaccinated = 0
+        self.vaccine_saves = 0
         self.population = self._create_population(self.initial_infected)
 
         self.newly_infected = []
@@ -62,6 +63,7 @@ class Simulation(object):
         '''
         
         population = []
+        self.next_person_id = 0
 
         
         people_vacc = round(self.vacc_percentage * self.pop_size)
@@ -73,6 +75,7 @@ class Simulation(object):
                 population.append(person)
                 self.infected_list.append(person)
                 initial_infected -= 1
+                self.total_infected += 1
 
             elif people_vacc > 0:
                 population.append(Person(self.next_person_id, True))
@@ -106,7 +109,8 @@ class Simulation(object):
         ''' This method should run the simulation until all requirements for ending
         the simulation are met.
         '''
-      
+        self.logger.write_metadata(self.pop_size, self.vacc_percentage, self.virus.name, self.virus.mortality_rate, self.virus.repro_rate)
+
         # HINT: You may want to call the logger's log_time_step() method at the end of each time step.
         # TODO: Set this variable using a helper
         time_step_counter = 0
@@ -116,7 +120,7 @@ class Simulation(object):
         # round of this simulation.
             self.time_step()
             time_step_counter += 1
-            self.logger.log_time_step(time_step_counter)
+            self.logger.log_time_step(time_step_counter, self.total_infected, self.total_dead, self.vaccine_saves)
         print(f'The simulation has ended after {time_step_counter} turns.')
            
         
@@ -139,9 +143,9 @@ class Simulation(object):
             3. Otherwise call simulation.interaction(person, random_person) and
                 increment interaction counter by 1.
             '''
-        self.logger.write_metadata(self.pop_size, self.vacc_percentage, self.virus.name, self.virus.mortality_rate, self.virus.repro_rate)
         interaction_counter = 0
         for infected in self.infected_list:
+            interaction_counter = 0
             while interaction_counter <= 100 and infected.is_alive:
 
                 rand_person = self.get_rand_person()
@@ -151,12 +155,14 @@ class Simulation(object):
         for infected_person in self.infected_list:
 
             if infected_person.did_survive_infection():
-
+                self.logger.log_infection_survival(infected_person, True)
                 self.new_vaccinated += 1
 
             else:
 
+                self.logger.log_infection_survival(infected_person, False)
                 self.total_dead += 1
+
 
         self.infected_list = []
         self._infect_newly_infected()
@@ -190,20 +196,25 @@ class Simulation(object):
             #     Simulation object's newly_infected array, so that their .infected
             #     attribute can be changed to True at the end of the time step.
         # TODO: Call slogger method during this method.
-        
+        if random_person.is_vaccinated :
 
-        if random_person.is_vaccinated == False and random_person.infection == None:
+            self.logger.log_interaction(person, random_person, random_person_vacc= True)
+            self.vaccine_saves += 1
+
+        elif random_person.is_vaccinated == False and random_person.infection == None:
             num = random.uniform(0.0, 1.0)
             if num < self.virus.repro_rate :
                 self.newly_infected.append(random_person._id)
                 print('got infected')
-            self.logger.log_interaction(person, random_person, random_person_sick= None, random_person_vacc =False,
-                                         did_infect = True)
+                self.logger.log_interaction(person, random_person, did_infect = True)
+            
 
         # if random_person.is_vaccinated == True or random_person.infection is not None:
-        else:
-            self.logger.log_interaction(person, random_person, True,True)
         
+        
+        elif random_person.infection:
+
+            self.logger.log_interaction(person, random_person, random_person_sick = True)
 
     def _infect_newly_infected(self):
         ''' This method should iterate through the list of ._id stored in self.newly_infected
@@ -218,6 +229,7 @@ class Simulation(object):
                 if id == person._id:
                     person.infection = self.virus
                     self.infected_list.append(person)
+                    self.total_infected += 1
                     
                    
         self.newly_infected = []            
@@ -243,9 +255,10 @@ if __name__ == "__main__":
     # sim = Simulation(pop_size, vacc_percentage, initial_infected, virus)
 
     # sim.run()
-    virus = Virus("Ebola",0.25 , 0.7)
+    # virus = Virus("Ebola",0.25 , 0.7)
+    virus = Virus("Smallpox", 0.06 , 0.15)
     #sim = Simulation(100000,90,virus,10)
-    sim = Simulation(1000,0.5,virus,10)
+    sim = Simulation(1000, 0.8, virus, 50)
     #sim._create_population(10)
     #print(sim.population)
     # print(len(sim._create_population(15)))
