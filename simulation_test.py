@@ -3,6 +3,7 @@ import person
 import simulation
 import pytest
 import os
+import random
 
 virus = simulation.Virus('Ebola', 0.25, 0.7)
 sim = simulation.Simulation(100,0.5,virus,10)
@@ -59,3 +60,11 @@ def test_interaction():
     else:
         assert len(sim.newly_infected) == 0
 
+def test_infect_newly_infected():
+    sim._infect_newly_infected()
+    assert sim.newly_infected == []
+
+def test_run():
+    random.seed(42)
+    run = sim.run()
+    assert run == 'The simulation has ended after 0 turns.'

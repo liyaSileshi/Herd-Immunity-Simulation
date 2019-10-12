@@ -97,18 +97,16 @@ class Simulation(object):
         '''
         self.logger.write_metadata(self.pop_size, self.vacc_percentage, self.virus.name, self.virus.mortality_rate, self.virus.repro_rate)
 
-        # HINT: You may want to call the logger's log_time_step() method at the end of each time step.
-        # TODO: Set this variable using a helper
+        
         time_step_counter = 0
-        #should_continue = self._simulation_should_continue()
+       
         while self._simulation_should_continue():
-        # TODO: for every iteration of this loop, call self.time_step() to compute another
-        # round of this simulation.
+       
             self.time_step()
             time_step_counter += 1
             self.logger.log_time_step(time_step_counter, self.total_infected, self.total_dead, self.vaccine_saves)
         print(f'The simulation has ended after {time_step_counter} turns.')
-           
+        return f'The simulation has ended after {time_step_counter} turns.'
         
     def get_rand_person(self):
         rand_person = random.choice(self.population)

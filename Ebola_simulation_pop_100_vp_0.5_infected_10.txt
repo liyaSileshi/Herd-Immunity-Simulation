@@ -1,0 +1,1 @@
+Population size : 100, vacc_per: 0.5, virus_name: Ebola, mortality_rate: 0.7, repro_num: 0.25
