@@ -180,7 +180,7 @@ class Simulation(object):
                 self.newly_infected.append(random_person._id)
                 print('got infected')
                 self.logger.log_interaction(person, random_person, did_infect = True)
-               
+            return num  
         
         elif random_person.infection:
 

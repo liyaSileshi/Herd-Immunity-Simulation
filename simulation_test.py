@@ -52,8 +52,10 @@ def test_simulation_should_continue():
 def test_interaction():
     sim1 = person.Person (1, False, virus)
     sim2 = person.Person(2, False, None)
+    interact = sim.interaction(sim1, sim2)
+    assert interact
+    if interact < virus.repro_rate:
+        assert sim.newly_infected[0] == 2
+    else:
+        assert len(sim.newly_infected) == 0
 
-    sim.interaction(sim1, sim2)
-    # if interact < virus.repro_rate:
-    #     assert sim.newly_infected[0] == 2
-    assert sim.total_infected == 16
