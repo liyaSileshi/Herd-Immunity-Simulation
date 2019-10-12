@@ -14,21 +14,7 @@ class Simulation(object):
     infected people in a population are all variables that can be set when the program is run.
     '''
     def __init__(self, pop_size, vacc_percentage, virus, initial_infected=1):
-        ''' Logger object logger records all events during the simulation.
-        Population represents all Persons in the population.
-        The next_person_id is the next available id for all created Persons,
-        and should have a unique _id value.
-        The vaccination percentage represents the total percentage of population
-        vaccinated at the start of the simulation.
-        You will need to keep track of the number of people currently infected with the disease.
-        The total infected people is the running total that have been infected since the
-        simulation began, including the currently infected people who died.
-        You will also need to keep track of the number of people that have die as a result
-        of the infection.
-
-        All arguments will be passed as command-line arguments when the file is run.
-        HINT: Look in the if __name__ == "__main__" function at the bottom.
-        '''
+        
        
         
         self.next_person_id = 0 # Int
@@ -178,24 +164,11 @@ class Simulation(object):
             person1 (person): The initial infected person
             random_person (person): The person that person1 interacts with.
         '''
-        # Assert statements are included to make sure that only living people are passed
-        # in as params
-        #print(person.is_alive)
+       
         assert person.is_alive == True
         assert random_person.is_alive == True
 
-        # TODO: Finish this method.
-        #  The possible cases you'll need to cover are listed below:
-            # random_person is vaccinated:
-            #     nothing happens to random person.
-            # random_person is already infected:
-            #     nothing happens to random person.
-            # random_person is healthy, but unvaccinated:
-            #     generate a random number between 0 and 1.  If that number is smaller
-            #     than repro_rate, random_person's ID should be appended to
-            #     Simulation object's newly_infected array, so that their .infected
-            #     attribute can be changed to True at the end of the time step.
-        # TODO: Call slogger method during this method.
+        
         if random_person.is_vaccinated :
 
             self.logger.log_interaction(person, random_person, random_person_vacc= True)
@@ -207,10 +180,7 @@ class Simulation(object):
                 self.newly_infected.append(random_person._id)
                 print('got infected')
                 self.logger.log_interaction(person, random_person, did_infect = True)
-            
-
-        # if random_person.is_vaccinated == True or random_person.infection is not None:
-        
+               
         
         elif random_person.infection:
 
@@ -219,11 +189,7 @@ class Simulation(object):
     def _infect_newly_infected(self):
         ''' This method should iterate through the list of ._id stored in self.newly_infected
         and update each Person object with the disease. '''
-        # TODO: Call this method at the end of every time step and infect each Person.
-        # TODO: Once you have iterated through the entire list of self.newly_infected, remember
-        # to reset self.newly_infected back to an empty list.
-        # senew_vaccinated = []
-        #infected_people = []
+       
         for id in self.newly_infected:
             for person in self.population:
                 if id == person._id:
@@ -239,26 +205,26 @@ class Simulation(object):
 
 
 if __name__ == "__main__":
-    # params = sys.argv[1:]
-    # virus_name = str(params[0])
-    # repro_num = float(params[1])
-    # mortality_rate = float(params[2])
+    params = sys.argv[1:]
+    virus_name = str(params[0])
+    repro_num = float(params[1])
+    mortality_rate = float(params[2])
 
-    # pop_size = int(params[3])
-    # vacc_percentage = float(params[4])
+    pop_size = int(params[3])
+    vacc_percentage = float(params[4])
 
-    # if len(params) == 6:
-    #     initial_infected = int(params[5])
-    # else:
-    #     initial_infected = 1
-    # virus = Virus(name, repro_rate, mortality_rate)
-    # sim = Simulation(pop_size, vacc_percentage, initial_infected, virus)
+    if len(params) == 6:
+        initial_infected = int(params[5])
+    else:
+        initial_infected = 1
+    virus = Virus(virus_name, repro_num, mortality_rate)
+    sim = Simulation(pop_size, vacc_percentage, initial_infected, virus)
 
     # sim.run()
     # virus = Virus("Ebola",0.25 , 0.7)
-    virus = Virus("Smallpox", 0.06 , 0.15)
+    # virus = Virus("Smallpox", 0.06 , 0.15)
     #sim = Simulation(100000,90,virus,10)
-    sim = Simulation(1000, 0.8, virus, 50)
+    # sim = Simulation(1000, 0.8, virus, 50)
     #sim._create_population(10)
     #print(sim.population)
     # print(len(sim._create_population(15)))
@@ -267,6 +233,6 @@ if __name__ == "__main__":
     # print(sim.newly_infected[0])
     #for sim in sim.newly_infected:
     # sim._infect_newly_infected()
-    sim.run()
+    # sim.run()
     # print(sim.total_dead+sim.new_vaccinated)
     # print(sim.total_dead+sim.new_vaccinated+sim.initial_infected)
