@@ -151,7 +151,7 @@ class Simulation(object):
         self.infected_list = []
         self._infect_newly_infected()
         
-        print(self.total_dead+self.new_vaccinated)
+        #print(self.total_dead+self.new_vaccinated)
                
 
     def interaction(self, person, random_person):
@@ -176,7 +176,7 @@ class Simulation(object):
             num = random.uniform(0.0, 1.0)
             if num < self.virus.repro_rate :
                 self.newly_infected.append(random_person._id)
-                print('got infected')
+                #print('got infected')
                 self.logger.log_interaction(person, random_person, did_infect = True)
             return num  
         
@@ -204,21 +204,22 @@ class Simulation(object):
 
 if __name__ == "__main__":
     params = sys.argv[1:]
-    virus_name = str(params[0])
-    repro_num = float(params[1])
-    mortality_rate = float(params[2])
+    
+    pop_size = int(params[0])
+    vacc_percentage = float(params[1])
+    virus_name = str(params[2])
+    mortality_rate = float(params[3])
+    repro_num = float(params[4])
 
-    pop_size = int(params[3])
-    vacc_percentage = float(params[4])
 
     if len(params) == 6:
         initial_infected = int(params[5])
     else:
         initial_infected = 1
     virus = Virus(virus_name, repro_num, mortality_rate)
-    sim = Simulation(pop_size, vacc_percentage, initial_infected, virus)
+    sim = Simulation(pop_size, vacc_percentage, virus, initial_infected)
 
-    # sim.run()
+    sim.run()
     # virus = Virus("Ebola",0.25 , 0.7)
     # virus = Virus("Smallpox", 0.06 , 0.15)
     #sim = Simulation(100000,90,virus,10)

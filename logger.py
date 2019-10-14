@@ -92,4 +92,4 @@ class Logger(object):
             file.write(f"Time step {time_step_number} ended, beginning {time_step_number + 1}\n")
             file.write(f"Total infected: {total_infected}\n")
             file.write(f"Total dead: {total_dead}\n")
-            file.write(f"Total times vaccine saved person: {vaccine_saves}")
+            file.write(f"Total times vaccine saved person: {vaccine_saves}\n")
